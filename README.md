@@ -23,3 +23,17 @@ python -m pip install -r requirements.txt
 - `legislative/schemas.py`: Ordered DataFrame schemas bound to their DTO types.
 - `legislative/input/`: The four supplied input CSVs.
 - `docs/`: PDF with test definitions and expected outputs.
+
+## Tests
+
+```sh
+python -m unittest discover -s tests -v
+```
+
+Supported tests:
+- Legislator report with vote results
+- Bill report without vote results
+- Legislator report without vote results
+- Bill report without vote results
+- Empty legislator report
+- Empty bill report
