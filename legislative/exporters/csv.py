@@ -10,12 +10,15 @@ class CsvReportExporter:
     path: Path
     protected_paths: tuple[Path, ...]
 
-    def export(self, report: LegislatorReport | BillReport) -> None:
+    def validate_path(self) -> None:
         for protected in self.protected_paths:
             if self.path.resolve() == protected.resolve() or (
                 self.path.exists() and protected.exists() and self.path.samefile(protected)
             ):
                 raise ValueError(f"Output must not overwrite input: {self.path}")
+
+    def export(self, report: LegislatorReport | BillReport) -> None:
+        self.validate_path()
         self.path.parent.mkdir(parents=True, exist_ok=True)
         temporary = None
         try:
